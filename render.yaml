@@ -23,7 +23,7 @@ services:
       - key: DB_NAME
         fromDatabase:
           name: wallet-db
-          property: name
+          property: database
       - key: DB_USERNAME
         fromDatabase:
           name: wallet-db
