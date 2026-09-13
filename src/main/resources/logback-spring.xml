@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <customFields>{"service":"wallet-service"}</customFields>
+            <fieldNames>
+                <timestamp>timestamp</timestamp>
+                <version>[ignore]</version>
+            </fieldNames>
+            <includeMdcKeyName>correlation_id</includeMdcKeyName>
+            <includeMdcKeyName>user_id</includeMdcKeyName>
+        </encoder>
+    </appender>
+
+    <logger name="com.wallet" level="DEBUG"/>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>

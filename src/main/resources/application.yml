@@ -1,0 +1,37 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: wallet-service
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/wallet_db}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+    serialization:
+      write-dates-as-timestamps: false
+
+management:
+  endpoints:
+    web:
+      base-path: /
+      path-mapping:
+        health: health
+        prometheus: metrics
+      exposure:
+        include: health,prometheus
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    com.wallet: DEBUG
