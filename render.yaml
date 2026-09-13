@@ -1,0 +1,36 @@
+databases:
+  - name: wallet-db
+    plan: free
+    databaseName: wallet_db
+    user: wallet_user
+
+services:
+  - type: web
+    name: wallet-service
+    plan: free
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+    envVars:
+      - key: DB_HOST
+        fromDatabase:
+          name: wallet-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: wallet-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: wallet-db
+          property: name
+      - key: DB_USERNAME
+        fromDatabase:
+          name: wallet-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: wallet-db
+          property: password
+      - key: JAVA_OPTS
+        value: "-Xmx256m -Xms128m"
