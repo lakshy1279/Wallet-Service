@@ -25,6 +25,7 @@ public class AuthFilter extends OncePerRequestFilter {
         String path = request.getRequestURI();
         return path.startsWith("/health")
                 || path.startsWith("/metrics")
+                || path.startsWith("/dashboard")
                 || path.startsWith("/actuator");
     }
 
